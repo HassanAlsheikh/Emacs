@@ -174,7 +174,9 @@
  ;; If there is more than one, they won't work right.
  '(column-number-mode t)
  '(connection-local-criteria-alist
-   '(((:application tramp :protocol "flatpak")
+   '(((:application tramp :machine "MacStudio.local")
+      tramp-connection-local-darwin-ps-profile)
+     ((:application tramp :protocol "flatpak")
       tramp-container-connection-local-default-flatpak-profile)
      ((:application tramp :machine "localhost")
       tramp-connection-local-darwin-ps-profile)
@@ -370,6 +372,10 @@
 ;; PASTE
 (global-unset-key (kbd "C-y"))
 (global-set-key (kbd "s-v") 'yank)
+
+
+;;; Default font size to 19
+(set-face-attribute 'default nil :height 190)
 
 
 ;;; init.el ends here
