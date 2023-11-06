@@ -1,0 +1,103 @@
+# Compiled source #
+###################
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# Packages #
+############
+# It's generally not a good idea to include packages, as these can be installed
+# via package.el or straight.el when setting up Emacs on a new machine.
+elpa/
+straight/build/
+straight/repos/
+
+# Auto-save & .cache files #
+###################
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+/auto-save-list
+tramp
+.\#*
+/.cache
+*.cache
+
+# lock files #
+##############
+.\#*
+
+# Backup files #
+################
+*~
+\#*\#
+*.save
+*.sav
+
+# Custom file #
+###############
+# If you use a custom file for Emacs customizations, you might want to ignore it
+# if it contains personal information or if you prefer to keep your custom-set-variables
+# in a different file.
+custom.el
+
+# Bookmarks #
+#############
+# Bookmarks can contain sensitive file paths.
+bookmarks
+
+# Recent files #
+################
+recentf
+
+# Projectile #
+##############
+.projectile
+projectile-bookmarks.eld
+
+# Org-mode #
+############
+# Depending on how you use org-mode, you may have personal or sensitive data in org files.
+# Adjust the ignore rules based on your usage.
+*.org-id-locations
+*_archive
+org-roam.db
+org-roam.db-journal
+
+
+# eshell files #
+################
+# Eshell history and aliases may contain sensitive information.
+eshell/history
+eshell/lastdir
+
+# ctags #
+#########
+tags
+
+# Various #
+###########
+*.log
+*.aux
+*.toc
+*.nav
+*.snm
+*.out
+*.blg
+*.bbl
+desktop.ini
+Thumbs.db
+.DS_Store
+*.thm
+
+# Transient directory #
+#######################
+/transient/
+
+# YASnippet directory #
+#######################
+/snippets/
