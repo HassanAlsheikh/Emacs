@@ -117,14 +117,6 @@
 
 
 
-;; FONTS
-;; change the font
-;; (set-face-attribute 'default nil :font "Arial-19" )
-;; arabic font
-(set-frame-font "CaskaydiaCove Nerd Font-19" nil t)
-
-
-
 ;; global visual line mode
 (global-visual-line-mode t)
 
