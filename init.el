@@ -4,6 +4,30 @@
 ;;; load the list/models/plugins directory
 
 
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; PACKAGE MANAGER - MELPA;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(require 'package)
+(add-to-list 'package-archives
+             '("melpa" . "https://melpa.org/packages/") t)
+(package-initialize)
+(unless package-archive-contents
+  (package-refresh-contents))
+;; Install use-package if it's not already installed
+(unless (package-installed-p 'use-package)
+  (package-install 'use-package))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; END OF PACKAGE MANAGER - MELPA ;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+;;; Use use-package for package management;
+(require 'use-package)
+
+
+
 ;;;;;;;;;;;;;;;
 ;;; TREEMCS ;;;
 ;;;;;;;;;;;;;;;
@@ -98,22 +122,6 @@
 ;; (set-face-attribute 'default nil :font "Arial-19" )
 ;; arabic font
 (set-frame-font "CaskaydiaCove Nerd Font-19" nil t)
-
-
-
-;; PACKAGE MANAGER - MELPA
-(require 'package)
-(add-to-list 'package-archives
-             '("melpa" . "https://melpa.org/packages/") t)
-(package-initialize)
-(unless package-archive-contents
-  (package-refresh-contents))
-;; Install use-package if it's not already installed
-(unless (package-installed-p 'use-package)
-  (package-install 'use-package))
-;; Use use-package for package management; makes .emacs cleaner
-(require 'use-package)
-
 
 
 
