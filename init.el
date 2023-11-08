@@ -396,7 +396,10 @@
 (global-set-key (kbd "s-p") 'helm-M-x)
 
 ;;; Open file from C-x C-f to s-o
-(global-set-key (kbd "s-o") 'find-file)
+(global-set-key (kbd "s-o") 'helm-find-files)
+
+;;; Buffer list
+(global-set-key (kbd "s-b") 'helm-buffers-list)
 
 ;;; Search text in the opened file from C-s to s-f
 (global-set-key (kbd "s-f") 'isearch-forward)
