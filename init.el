@@ -1,9 +1,4 @@
 ;;; Use at your own risk - Hassan Alsheikh
-;;; package --- A simple line that sets the path for emacs lisp
-;;; Commentary:
-;;; load the list/models/plugins directory
-
-
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -403,7 +398,10 @@
 
 ;;; Open file from C-x C-f to s-o
 (global-set-key (kbd "s-o") 'find-file)
-		
+
+;;; Search text in the opened file from C-s to s-f
+(global-set-key (kbd "s-f") 'isearch-forward)
+
 ;;; Default font size to 19
 (set-face-attribute 'default nil :height 190)
 
