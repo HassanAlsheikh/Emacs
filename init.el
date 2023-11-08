@@ -398,6 +398,12 @@
 ;;; Redo
 (global-set-key (kbd "s-r") 'undo-tree-redo)
 
+;;; Execute Extended Command from M-x to s-p
+(global-set-key (kbd "s-p") 'execute-extended-command)
+
+;;; Open file from C-x C-f to s-o
+(global-set-key (kbd "s-o") 'find-file)
+		
 ;;; Default font size to 19
 (set-face-attribute 'default nil :height 190)
 
