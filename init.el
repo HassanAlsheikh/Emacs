@@ -361,18 +361,42 @@
   :config
   (which-key-mode))
 
+;;;;;;;;;;;;;;;;;
+;;; Undo Tree ;;;
+;;;;;;;;;;;;;;;;;
+(use-package undo-tree
+  :ensure t
+  :config
+  (global-undo-tree-mode 1))
+;;;;;;;;;;;;;;;;;;;;;;;;
+;;; END OF UNDO TREE ;;;
+;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-;; KEYBINDINGS & SHORTCODES
 
-;; SAVE
-(global-unset-key (kbd "C-x C-s"))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; KEYBINDINGS & SHORTCODES ;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; SAVE
 (global-set-key (kbd "s-s") 'save-buffer)
 
-;; PASTE
-(global-unset-key (kbd "C-y"))
+;;; PASTE
 (global-set-key (kbd "s-v") 'yank)
 
+;;; Beginning of buffer
+(global-set-key (kbd "s-<up>") 'beginning-of-buffer)
+
+;;; End of buffer
+(global-set-key (kbd "s-<down>") 'end-of-buffer)
+
+;;; Kill buffer with Command-w
+(global-set-key (kbd "s-w") 'kill-buffer)
+
+;;; Undo
+(global-set-key (kbd "s-z") 'undo-tree-undo)
+
+;;; Redo
+(global-set-key (kbd "s-r") 'undo-tree-redo)
 
 ;;; Default font size to 19
 (set-face-attribute 'default nil :height 190)
