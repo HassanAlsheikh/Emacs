@@ -259,7 +259,7 @@
    '("603a831e0f2e466480cdc633ba37a0b1ae3c3e9a4e90183833bc4def3421a961" "944d52450c57b7cbba08f9b3d08095eb7a5541b0ecfb3a0a9ecd4a18f3c28948" "c865644bfc16c7a43e847828139b74d1117a6077a845d16e71da38c8413a5aaa" "adaf421037f4ae6725aa9f5654a2ed49e2cd2765f71e19a7d26a454491b486eb" "f681100b27d783fefc3b62f44f84eb7fa0ce73ec183ebea5903df506eb314077" default))
  '(global-display-line-numbers-mode t)
  '(package-selected-packages
-   '(undo-tree enh-ruby-mode ruby-tools treemacs rubocop yaml-mode magit robe rspec-mode projectile-rails org-modern rainbow-mode emacsql-sqlite org-roam-bibtex org-roam-ui org-roam-timestamps cmake-mode vterm eat org-roam rainbow-delimiters neotree web-mode async zig-mode pdf-tools all-the-icons-dired lsp-python-ms which-key yasnippet projectile lsp-tailwindcss helm-mode-manager flycheck ace-window pfuture cfrs hydra lsp-ui dracula-theme helm-lsp lsp-julia dap-mode company lsp-ivy)))
+   '(smart-tab ruby-extra-highlight undo-tree enh-ruby-mode ruby-tools treemacs rubocop yaml-mode magit robe rspec-mode projectile-rails org-modern rainbow-mode emacsql-sqlite org-roam-bibtex org-roam-ui org-roam-timestamps cmake-mode vterm eat org-roam rainbow-delimiters neotree web-mode async zig-mode pdf-tools all-the-icons-dired lsp-python-ms which-key yasnippet projectile lsp-tailwindcss helm-mode-manager flycheck ace-window pfuture cfrs hydra lsp-ui dracula-theme helm-lsp lsp-julia dap-mode company lsp-ivy)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -368,6 +368,32 @@
 
 
 
+;;;;;;;;;;;;;;;;
+;;; Web-Mode ;;;
+;;;;;;;;;;;;;;;;
+(use-package web-mode
+  :ensure t
+  :mode (("\\.erb\\'" . web-mode))
+  :config
+  (setq web-mode-enable-auto-pairing t))
+;;;;;;;;;;;;;;;;;;;;;;;
+;;; END OF WEB-MODE ;;;
+;;;;;;;;;;;;;;;;;;;;;;;
+
+
+;;;;;;;;;;;;;;;;;
+;;; Smart TAB ;;;
+;;;;;;;;;;;;;;;;;
+(use-package smart-tab
+  :ensure t
+  :config
+  (global-smart-tab-mode 1))
+;;;;;;;;;;;;;;;;;;;;;;;;
+;;; END OF SMART TAB ;;;
+;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; KEYBINDINGS & SHORTCODES ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -400,9 +426,13 @@
 
 ;;; Buffer list
 (global-set-key (kbd "s-b") 'helm-buffers-list)
+(global-set-key (kbd "s-<kp-0>") 'helm-buffers-list)
 
 ;;; Search text in the opened file from C-s to s-f
 (global-set-key (kbd "s-f") 'isearch-forward)
+
+;;; Start The Terminal (Eshell)
+(global-set-key (kbd "s-t") 'eshell)
 
 ;;; Default font size to 19
 (set-face-attribute 'default nil :height 190)
