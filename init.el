@@ -5,8 +5,7 @@
 ;;; PACKAGE MANAGER - MELPA;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (require 'package)
-(add-to-list 'package-archives
-             '("melpa" . "https://melpa.org/packages/") t)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (package-initialize)
 (unless package-archive-contents
   (package-refresh-contents))
@@ -41,7 +40,6 @@
 
 ;;;  Treemacs will start with hidden files turned off by default. If you ever need to see hidden files again, you can use the t h toggle inside Treemacs to make them visible.
 (setq treemacs-show-hidden-files nil)
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;END OF TREEMACS Custom Configuragtions;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -69,16 +67,17 @@
 
 
 
-;;; Setup the Emacs PATH: Ensure that Emacs uses the same PATH as your shell, so it can find the correct Ruby binary and gems:
+;;; Setup the Emacs PATH: Ensure that Emacs uses the same PATH as your shell
 (use-package exec-path-from-shell
   :ensure t
   :config
   (when (memq window-system '(mac ns x))
     (exec-path-from-shell-initialize)))
 
-;;;;;;;;;;;;;;;
-;;; org-roam;;;
-;;;;;;;;;;;;;;;
+
+;;;;;;;;;;;;;;;;
+;;; org-roam ;;;
+;;;;;;;;;;;;;;;;
 (use-package org-roam
   :ensure t
   :custom
@@ -88,14 +87,7 @@
          ("C-c n g" . org-roam-graph)
          ("C-c n i" . org-roam-node-insert)
          ("C-c n c" . org-roam-capture)
-         ;; Dailies
-         ("C-c n j" . org-roam-dailies-capture-today))
-  :config
-  ;; If you're using a vertical completion framework, you might want a more informative completion interface
-  (setq org-roam-node-display-template (concat "${title:*} " (propertize "${tags:10}" 'face 'org-tag)))
-  (org-roam-db-autosync-mode)
-  ;; If using org-roam-protocol
-  (require 'org-roam-protocol))
+         ("C-c n j" . org-roam-dailies-capture-today))) ;; Dailies
 ;;;;;;;;;;;;;;;;;;;;;;
 ;;; END OF ORG ROAM;;;
 ;;;;;;;;;;;;;;;;;;;;;;
@@ -108,7 +100,9 @@
 
 
 ;;; adding delimiters and running it when emacs starts
-(setq rainbow-delimiters-mode t)
+(use-package rainbow-delimiters
+  :ensure t
+  :hook (prog-mode . rainbow-delimiters-mode))
 
 
 
@@ -131,12 +125,27 @@
 
 
 
-;; Enable lsp-mode for C/C++ auto-completion and syntax highlighting
+;;;;;;;;;;;;;;;;
+;;; LSP-MODE ;;;
+;;;;;;;;;;;;;;;;
 (use-package lsp-mode
-  :ensure t
-  :hook ((c-mode . lsp)
-         (lsp-mode . lsp-enable-which-key-integration))
-  :commands lsp)
+  :commands (lsp lsp-deferred)
+  :hook ((lisp-mode . lsp-deferred)
+	 (python-mode . lsp-deferred)
+         (c-mode . lsp-deferred)
+         (c++-mode . lsp-deferred)
+         (ruby-mode . lsp-deferred)
+         (rust-mode . lsp-deferred)
+         (zig-mode . lsp-deferred)
+         (js-mode . lsp-deferred)
+         (typescript-mode . lsp-deferred)
+         (html-mode . lsp-deferred)
+         (css-mode . lsp-deferred)
+         (swift-mode . lsp-deferred))
+  :init
+  (setq lsp-enable-file-watchers nil)
+  :config
+  (setq lsp-prefer-flymake nil))  ; Use flycheck or lsp-ui for error checking if available
 
 ;; Optionally, install and enable lsp-ui for additional features
 ;; (e.g., code navigation, inline documentation, etc.)
@@ -144,22 +153,33 @@
   :ensure t
   :commands lsp-ui-mode)
 
+;; Tailwind CSS specific setup (if required)
+(use-package lsp-tailwindcss
+  :after lsp-mode
+  :hook (css-mode . lsp-tailwindcss-enable))
+
 (require 'lsp-mode)
-(add-hook 'c-mode-hook 'lsp)
-(add-hook 'c++-mode-hook 'lsp)
-(add-hook 'zig-mode-hook 'lsp)
-(add-hook 'rust-mode-hook 'lsp)
-(add-hook 'julia-mode-hook 'lsp)
-(add-hook 'tailwindcss-mode-hook 'lsp)
 
+;; Additional lsp-mode configurations
+(setq lsp-enable-file-watchers nil)
+(setq lsp-log-io nil)
+(setq lsp-prefer-flymake nil)  ; Use flycheck instead of flymake
 
-;; stopping the start up splash screen
+;; Optional: lsp-ui for additional UI features
+(when (require 'lsp-ui nil 'noerror)
+  (add-hook 'lsp-mode-hook 'lsp-ui-mode))
 
-;; disable the scroll bars
-;; (scroll-bar-mode -1)
+;; Optional: company-mode for autocompletion
+(when (require 'company nil 'noerror)
+  (add-hook 'lsp-mode-hook 'company-mode))
 
-;; remove top bar / tools 
-;; (tool-bar-mode -1)
+;; Tailwind CSS specific setup
+(when (require 'lsp-tailwindcss nil 'noerror)
+  (add-hook 'css-mode-hook 'lsp-tailwindcss-enable))
+;;;;;;;;;;;;;;;;;;;;;;;
+;;; END OF LSP-MODE ;;;
+;;;;;;;;;;;;;;;;;;;;;;;
+
 
 
 (custom-set-variables
@@ -259,7 +279,7 @@
    '("603a831e0f2e466480cdc633ba37a0b1ae3c3e9a4e90183833bc4def3421a961" "944d52450c57b7cbba08f9b3d08095eb7a5541b0ecfb3a0a9ecd4a18f3c28948" "c865644bfc16c7a43e847828139b74d1117a6077a845d16e71da38c8413a5aaa" "adaf421037f4ae6725aa9f5654a2ed49e2cd2765f71e19a7d26a454491b486eb" "f681100b27d783fefc3b62f44f84eb7fa0ce73ec183ebea5903df506eb314077" default))
  '(global-display-line-numbers-mode t)
  '(package-selected-packages
-   '(smart-tab ruby-extra-highlight undo-tree enh-ruby-mode ruby-tools treemacs rubocop yaml-mode magit robe rspec-mode projectile-rails org-modern rainbow-mode emacsql-sqlite org-roam-bibtex org-roam-ui org-roam-timestamps cmake-mode vterm eat org-roam rainbow-delimiters neotree web-mode async zig-mode pdf-tools all-the-icons-dired lsp-python-ms which-key yasnippet projectile lsp-tailwindcss helm-mode-manager flycheck ace-window pfuture cfrs hydra lsp-ui dracula-theme helm-lsp lsp-julia dap-mode company lsp-ivy)))
+   '(emmet-mode smart-tab ruby-extra-highlight undo-tree enh-ruby-mode ruby-tools treemacs rubocop yaml-mode magit robe rspec-mode projectile-rails org-modern rainbow-mode emacsql-sqlite org-roam-bibtex org-roam-ui org-roam-timestamps cmake-mode vterm eat org-roam rainbow-delimiters neotree web-mode async zig-mode pdf-tools all-the-icons-dired lsp-python-ms which-key yasnippet projectile lsp-tailwindcss helm-mode-manager flycheck ace-window pfuture cfrs hydra lsp-ui dracula-theme helm-lsp lsp-julia dap-mode company lsp-ivy)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -350,10 +370,12 @@
 
 
 
-(use-package which-key 
+(use-package which-key
   :ensure t
   :config
   (which-key-mode))
+
+
 
 ;;;;;;;;;;;;;;;;;
 ;;; Undo Tree ;;;
@@ -373,16 +395,44 @@
 ;;;;;;;;;;;;;;;;
 (use-package web-mode
   :ensure t
-  :mode (("\\.erb\\'" . web-mode))
+  :mode (("\\.erb\\'" . web-mode)
+         ("\\.eex\\'" . web-mode)
+	 ("\\.html?\\'" . web-mode)
+         ("\\.css\\'" . web-mode)
+         ("\\.js\\'" . web-mode)
+         ("\\.ts\\'" . web-mode)
+         ("\\.jsx?\\'" . web-mode)
+         ("\\.tsx?\\'" . web-mode)
+	 )
   :config
-  (setq web-mode-enable-auto-pairing t))
+  (setq web-mode-enable-auto-pairing t)
+  (setq web-mode-auto-close-style 2)  ; Auto-close tags
+  (setq web-mode-enable-auto-quoting t)  ; Auto-quote attribute values
+  (setq web-mode-markup-indent-offset 2)  ; HTML indentation
+  (setq web-mode-css-indent-offset 2)     ; CSS indentation
+  (setq web-mode-code-indent-offset 2)    ; Script indentation (JS, PHP, etc.)
+  (setq web-mode-enable-css-colorization t)
+  )
 ;;;;;;;;;;;;;;;;;;;;;;;
 ;;; END OF WEB-MODE ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;
 
 
+
+;;;;;;;;;;;;;
+;;; EMMET ;;;
+;;;;;;;;;;;;;
+(use-package emmet-mode
+  :ensure t
+  :hook (web-mode . emmet-mode))  ; Enable emmet-mode in web-mode
+;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; END OF EMMET MODE ;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+
 ;;;;;;;;;;;;;;;;;
-;;; Smart TAB ;;;
+;;; Smart TAB ;;; i am still testing this i might remove it.
 ;;;;;;;;;;;;;;;;;
 (use-package smart-tab
   :ensure t
@@ -390,6 +440,19 @@
   (global-smart-tab-mode 1))
 ;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; END OF SMART TAB ;;;
+;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+;;;;;;;;;;;;;;;;;;;;
+;;; SMART PARENS ;;;
+;;;;;;;;;;;;;;;;;;;;
+(use-package smartparens-mode
+  :ensure smartparens
+  :hook (prog-mode text-mode markdown-mode)
+  :config
+  (require 'smartparens-config))
+;;;;;;;;;;;;;;;;;;;;;;;;
+;;; END SMART PARENS ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;
 
 
