@@ -500,5 +500,8 @@
 ;;; Default font size to 19
 (set-face-attribute 'default nil :height 190)
 
+;;; C-Tab go to next buffer C-Shit-Tab go to previouse buffer
+(global-set-key (kbd "C-<tab>") 'next-buffer)
+(global-set-key (kbd "C-S-<tab>") 'previous-buffer)
 
 ;;; init.el ends here
