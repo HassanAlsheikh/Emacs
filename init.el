@@ -189,7 +189,9 @@
  ;; If there is more than one, they won't work right.
  '(column-number-mode t)
  '(connection-local-criteria-alist
-   '(((:application tramp :machine "MacStudio.local")
+   '(((:application eshell)
+      eshell-connection-default-profile)
+     ((:application tramp :machine "MacStudio.local")
       tramp-connection-local-darwin-ps-profile)
      ((:application tramp :protocol "flatpak")
       tramp-container-connection-local-default-flatpak-profile)
@@ -200,7 +202,9 @@
      ((:application tramp)
       tramp-connection-local-default-system-profile tramp-connection-local-default-shell-profile)))
  '(connection-local-profile-alist
-   '((tramp-container-connection-local-default-flatpak-profile
+   '((eshell-connection-default-profile
+      (eshell-path-env-list))
+     (tramp-container-connection-local-default-flatpak-profile
       (tramp-remote-path "/app/bin" tramp-default-remote-path "/bin" "/usr/bin" "/sbin" "/usr/sbin" "/usr/local/bin" "/usr/local/sbin" "/local/bin" "/local/freeware/bin" "/local/gnu/bin" "/usr/freeware/bin" "/usr/pkg/bin" "/usr/contrib/bin" "/opt/bin" "/opt/sbin" "/opt/local/bin"))
      (tramp-connection-local-darwin-ps-profile
       (tramp-process-attributes-ps-args "-acxww" "-o" "pid,uid,user,gid,comm=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ" "-o" "state=abcde" "-o" "ppid,pgid,sess,tty,tpgid,minflt,majflt,time,pri,nice,vsz,rss,etime,pcpu,pmem,args")
@@ -279,7 +283,7 @@
    '("3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "8c7e832be864674c220f9a9361c851917a93f921fedb7717b1b5ece47690c098" "c517e98fa036a0c21af481aadd2bdd6f44495be3d4ac2ce9d69201fcb2578533" "014cb63097fc7dbda3edf53eb09802237961cbb4c9e9abd705f23b86511b0a69" "603a831e0f2e466480cdc633ba37a0b1ae3c3e9a4e90183833bc4def3421a961" "944d52450c57b7cbba08f9b3d08095eb7a5541b0ecfb3a0a9ecd4a18f3c28948" "c865644bfc16c7a43e847828139b74d1117a6077a845d16e71da38c8413a5aaa" "adaf421037f4ae6725aa9f5654a2ed49e2cd2765f71e19a7d26a454491b486eb" "f681100b27d783fefc3b62f44f84eb7fa0ce73ec183ebea5903df506eb314077" default))
  '(global-display-line-numbers-mode t)
  '(package-selected-packages
-   '(treemacs-nerd-icons major-mode-icons helm-icons all-the-icons-completion treemacs-all-the-icons all-the-icons-nerd-fonts all-the-icons doom-modeline emmet-mode smart-tab ruby-extra-highlight undo-tree enh-ruby-mode ruby-tools treemacs rubocop yaml-mode magit robe rspec-mode projectile-rails org-modern rainbow-mode emacsql-sqlite org-roam-bibtex org-roam-ui org-roam-timestamps cmake-mode vterm eat org-roam rainbow-delimiters neotree web-mode async zig-mode pdf-tools all-the-icons-dired lsp-python-ms which-key yasnippet projectile lsp-tailwindcss helm-mode-manager flycheck ace-window pfuture cfrs hydra lsp-ui dracula-theme helm-lsp lsp-julia dap-mode company lsp-ivy)))
+   '(helm-rubygems-local helm-rubygems-org treemacs-nerd-icons major-mode-icons helm-icons all-the-icons-completion treemacs-all-the-icons all-the-icons-nerd-fonts all-the-icons doom-modeline emmet-mode smart-tab ruby-extra-highlight undo-tree enh-ruby-mode ruby-tools treemacs rubocop yaml-mode magit robe rspec-mode projectile-rails org-modern rainbow-mode emacsql-sqlite org-roam-bibtex org-roam-ui org-roam-timestamps cmake-mode vterm org-roam rainbow-delimiters neotree web-mode async zig-mode pdf-tools all-the-icons-dired lsp-python-ms which-key yasnippet projectile lsp-tailwindcss helm-mode-manager flycheck ace-window pfuture cfrs hydra lsp-ui dracula-theme helm-lsp lsp-julia dap-mode company lsp-ivy)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
